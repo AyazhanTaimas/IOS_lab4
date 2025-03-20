@@ -15,9 +15,13 @@ struct FavoritesView: View {
                         AsyncImage(url: hero.heroImageUrl) { phase in
                             switch phase {
                             case .success(let image):
-                                image.resizable().frame(width: 50, height: 50).clipShape(Circle())
+                                image
+                                    .resizable().frame(width: 80, height: 100)
+                                    .clipShape(RoundedRectangle(cornerRadius: 2.5))
                             default:
-                                Color.gray.frame(width: 50, height: 50).clipShape(Circle())
+                                Color
+                                    .gray.frame(width: 80, height: 100)
+                                    .clipShape(RoundedRectangle(cornerRadius: 2.5))
                             }
                         }
                         Text(hero.name)

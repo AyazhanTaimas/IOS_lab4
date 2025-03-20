@@ -1,7 +1,5 @@
 import SwiftUI
 
-
-
 struct HeroListView: View {
     @StateObject var viewModel = HeroListViewModel(service: HeroServiceImpl(), router: HeroRouter())
 
@@ -10,20 +8,20 @@ struct HeroListView: View {
             HStack {
                 Text("Hero List")
                     .font(.largeTitle)
-                    .padding(.leading, 16) // 16 - это размер отступа, можно изменить
-                
+                    .bold()
+                    .padding(.leading, 16)
+
                 Spacer()
-                
+
                 NavigationLink(destination: FavoritesView(service: HeroServiceImpl())) {
                     Text("⭐")
-                        .font(.system(size: 15)) // уменьшаем размер звездочки
-                        .padding(8) // уменьшаем отступы внутри фона
+                        .font(.system(size: 18))
+                        .padding(10)
                         .background(Color.blue)
                         .foregroundColor(.white)
-                        .cornerRadius(8) // уменьшаем радиус
-                        .padding(.trailing, 5)
+                        .cornerRadius(10)
+                        .padding(.trailing, 10)
                 }
-                .frame(width: 40, height: 40) // уменьшаем общий размер кнопки
             }
 
             TextField("Search Heroes", text: $viewModel.searchQuery)
@@ -61,16 +59,23 @@ extension HeroListView {
             AsyncImage(url: model.heroImage) { phase in
                 switch phase {
                 case .success(let image):
-                    image.resizable().frame(width: 100, height: 100).padding(.trailing, 16)
+                    image.resizable()
+                        .frame(width: 100, height: 120)
+                        .clipShape(RoundedRectangle(cornerRadius: 5))
+                        .padding(.trailing, 12)
                 default:
-                    Color.gray.frame(width: 100, height: 100).padding(.trailing, 16)
+                    Color.gray
+                        .frame(width: 100, height: 120)
+                        .clipShape(RoundedRectangle(cornerRadius: 5))
+                        .padding(.trailing, 12)
                 }
             }
 
-            VStack {
-                Text(model.title)
-                Text(model.description)
-            }
+            Text(model.title)
+                .font(.headline)
+                .lineLimit(1)
+                .truncationMode(.tail)
+
             Spacer()
         }
         .frame(maxWidth: .infinity)
