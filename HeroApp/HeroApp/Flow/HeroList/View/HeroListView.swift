@@ -10,18 +10,21 @@ struct HeroListView: View {
             HStack {
                 Text("Hero List")
                     .font(.largeTitle)
+                    .padding(.leading, 16) // 16 - это размер отступа, можно изменить
                 
                 Spacer()
-
-                NavigationLink(destination: FavoritesView(service: HeroServiceImpl())) { 
-                    Text("Favorites")
-                        .padding()
+                
+                NavigationLink(destination: FavoritesView(service: HeroServiceImpl())) {
+                    Text("⭐")
+                        .font(.system(size: 15)) // уменьшаем размер звездочки
+                        .padding(8) // уменьшаем отступы внутри фона
                         .background(Color.blue)
                         .foregroundColor(.white)
-                        .cornerRadius(10)
+                        .cornerRadius(8) // уменьшаем радиус
+                        .padding(.trailing, 5)
                 }
+                .frame(width: 40, height: 40) // уменьшаем общий размер кнопки
             }
-            .padding(.horizontal)
 
             TextField("Search Heroes", text: $viewModel.searchQuery)
                 .textFieldStyle(RoundedBorderTextFieldStyle())

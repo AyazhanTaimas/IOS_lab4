@@ -8,7 +8,7 @@ class HeroDetailViewModel: ObservableObject {
 
     init(heroId: Int, service: HeroService) {
         self.service = service
-        self.hero = HeroEntity(id: heroId, name: "", appearance: HeroEntity.Appearance(race: nil), images: HeroEntity.HeroImage(sm: "", md: "")) // Заглушка
+        self.hero = HeroEntity(id: heroId, name: "", appearance: HeroEntity.Appearance(race: nil, eyeColor: nil, height: nil, weight: nil, hairColor: nil), images: HeroEntity.HeroImage(sm: "", md: "")) // Заглушка
         Task {
             await loadHeroDetails()
         }

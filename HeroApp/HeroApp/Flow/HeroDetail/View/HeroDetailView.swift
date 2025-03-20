@@ -5,12 +5,12 @@ struct HeroDetailView: View {
     
     var body: some View {
         VStack {
-            AsyncImage(url: viewModel.hero.heroImageUrl) { phase in // Здесь исправлено
+            AsyncImage(url: viewModel.hero.heroImageUrl) { phase in
                 switch phase {
                 case .success(let image):
                     image.resizable()
                         .frame(width: 200, height: 200)
-                        .clipShape(RoundedRectangle(cornerRadius: 10)) // Добавлено: закругление углов
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
                 default:
                     Color.gray.frame(width: 200, height: 200)
                 }
@@ -20,8 +20,19 @@ struct HeroDetailView: View {
                 .font(.largeTitle)
                 .padding()
             
-            Text("Race: \(viewModel.hero.appearance.race ?? "Unknown")") // Исправлено: добавлен доступ к appearance.race
+            Text("Race: \(viewModel.hero.appearance.race ?? "Unknown")")
                 .padding()
+            
+            Text("Height: \(viewModel.hero.appearance.formattedHeight)")
+                .padding()
+            
+            Text("Weight: \(viewModel.hero.appearance.formattedWeight)")
+                .padding()
+            
+            Text("Eye Color: \(viewModel.hero.appearance.eyeColor ?? "Unknown")") // Добавлен height
+                    .padding()
+            Text("Hair Color: \(viewModel.hero.appearance.hairColor ?? "Unknown")") // Добавлен height
+                    .padding()
             
             Button(action: {
                 viewModel.toggleFavorite()
@@ -38,7 +49,7 @@ struct HeroDetailView: View {
             Task {
                 await viewModel.loadHeroDetails()
             }
-            viewModel.checkIfFavorite() // Проверяем, избранный ли герой
+            viewModel.checkIfFavorite()
         }
     }
 }
