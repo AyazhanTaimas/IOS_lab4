@@ -15,7 +15,8 @@ HeroError.swift – обработка ошибок
 ```swift
 enum HeroError: Error {
     case wrongUrl, somethingWentWrong
-}```
+}
+```
 
 **Router**
 HeroRouter.swift – отвечает за навигацию
@@ -28,7 +29,8 @@ final class HeroRouter {
         let detailVC = UIHostingController(rootView: HeroDetailView(viewModel: detailViewModel))
         rootViewController?.pushViewController(detailVC, animated: true)
     }
-}```
+}
+```
 
 **Service**
 HeroService.swift – загрузка данных
@@ -50,13 +52,15 @@ struct HeroServiceImpl: HeroService {
         let (data, _) = try await URLSession.shared.data(from: url)
         return try JSONDecoder().decode(HeroEntity.self, from: data)
     }
-}```
+}
+```
 
 **Utils**
 Constants.swift – базовый URL API
 ```swift
 enum Constants {
     static let baseUrl = "https://akabab.github.io/superhero-api/api/"
-}```
+}
+```
 
 
